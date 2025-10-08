@@ -1,0 +1,50 @@
+:root {
+  --fg: #111;
+  --muted: #666;
+  --border: #ddd;
+  --msb-primary: #0E51A7;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--fg);
+  margin: 0;
+  background: #fafafa;
+}
+
+.container { max-width: 880px; margin: 2rem auto; padding: 0 1rem; }
+.muted { color: var(--muted); }
+.error { color: #b00020; }
+
+.brand { display: flex; align-items: center; gap: .75rem; }
+.brand .logo { height: 80px; width: auto; }
+
+.search { display: flex; gap: 0.5rem; margin: 1rem 0 2rem; }
+.search input { flex: 1; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 6px; }
+.search button, .actions .print { padding: 0.6rem 1rem; border: 1px solid var(--border); background: white; border-radius: 6px; cursor: pointer; }
+
+.ticket-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+.ticket { background: white; border: 1px dashed #bbb; border-radius: 8px; padding: 1rem; }
+.ticket header { border-bottom: 1px solid var(--border); margin-bottom: 0.75rem; padding-bottom: 0.5rem; }
+.ticket .event { margin: 0; font-size: 1.05rem; color: var(--msb-primary); }
+.ticket .type { margin: 0.25rem 0 0.25rem; color: var(--muted); }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem .75rem; }
+.grid label { font-size: .75rem; color: var(--muted); display: block; }
+.code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+
+.symbols { display: flex; gap: .75rem; align-items: center; justify-content: space-between; margin-top: .5rem; }
+.qr svg, .barcode svg { display: block; }
+.qr svg { shape-rendering: crispEdges; }
+
+@media print {
+  body { background: white; }
+  .search, .actions, .brand { display: none !important; }
+  .container { max-width: none; margin: 0; padding: 0; }
+  .ticket-list { grid-template-columns: 1fr; gap: .2rem; }
+  .ticket { border: none; border-bottom: 1px dashed #000; border-radius: 0; padding: .4rem .6rem; page-break-inside: avoid; }
+  .ticket header { border: none; margin: 0 0 .2rem; padding: 0; }
+  /* Thermal preset (uncomment as needed) */
+  /* @page { size: 80mm auto; margin: 4mm; } */
+  /* @page { size: 58mm auto; margin: 3mm; } */
+}

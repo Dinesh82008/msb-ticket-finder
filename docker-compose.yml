@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  server:
+    build: ./server
+    ports:
+      - "5050:5050"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+  client:
+    build: ./client
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - VITE_API_TARGET=http://server:5050
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - server

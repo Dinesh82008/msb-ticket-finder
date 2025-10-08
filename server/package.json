@@ -1,0 +1,20 @@
+{
+  "name": "msb-ticket-finder-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.0.0",
+    "node-fetch": "^3.3.2",
+    "pino": "^9.0.0",
+    "pino-http": "^10.0.0",
+    "zod": "^3.23.8"
+  }
+}
