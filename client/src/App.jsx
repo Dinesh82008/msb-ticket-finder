@@ -33,9 +33,40 @@ export default function App() {
 
   return (
     <main className="container">
+      {/* Print styles: print one ticket per page, hide UI controls */}
+      <style>{`
+        @media print {
+          /* hide app chrome */
+          .brand, .search, .actions, .muted, .error { display: none !important; }
+
+          /* ensure ticket fills page and each ticket starts on a new page */
+          .ticket-list { display: block; }
+          .ticket {
+            page-break-after: always;
+            break-after: page;
+            break-inside: avoid;
+            page-break-inside: avoid;
+            -webkit-print-color-adjust: exact;
+            margin: 0;
+            padding: 12mm;
+            box-sizing: border-box;
+            width: 100%;
+          }
+
+          /* avoid cutting barcode or grids */
+          .ticket .grid, .ticket .symbols { break-inside: avoid; page-break-inside: avoid; }
+
+          /* optionally remove background/colors for clean prints */
+          body { background: #fff; color: #000; }
+          img.logo { display: none; } /* hide logo if you want */
+        }
+
+        /* screen-friendly spacing (kept unchanged) */
+      `}</style>
+
       <header className="brand">
         <img src="/msb-logo.png" alt="MSB" className="logo" />
-        <h1> Ticket Finder & Printer </h1>
+        <h5> Ticket Finder & Printer </h5>
       </header>
 
       <form onSubmit={onSubmit} className="search">
@@ -58,11 +89,12 @@ export default function App() {
             {result.tickets.map((t, idx) => (
               <article key={idx} className="ticket">
                 <header>
-                  <h2 className="event">{t.eventName || 'Event'}</h2>
+                 { /* <h2 className="event">{t.eventName || 'Event'}</h2> */}
+                 <h2 className="attendee">{t.attendeeName || '-'}</h2> 
                   <p className="type">{t.ticketType || 'Ticket'}</p>
                 </header>
 
-                <section className="grid">
+               { /* <section className="grid">
                   <div>
                     <label>Attendee</label>
                     <div>{t.attendeeName || '—'}</div>
@@ -79,7 +111,7 @@ export default function App() {
                     <label>Payment Date</label>
                     <div>{t.paymentDate || '—'}</div>
                   </div>
-                </section>
+                </section> */}
 
                 <div className="symbols">
                 { /* <div className="qr" aria-label="QR Code">
@@ -104,7 +136,7 @@ export default function App() {
           </div>
 
           <div className="actions">
-            <button onClick={handlePrint} className="print">Print</button>
+            <button onClick={handlePrint} className="print"> Ticket Print</button>
           </div>
         </>
       )}
