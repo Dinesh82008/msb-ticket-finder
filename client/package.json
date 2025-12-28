@@ -9,11 +9,11 @@
     "preview": "vite preview --host 0.0.0.0 --port 5173"
   },
   "dependencies": {
-    "axios": "^1.7.7",
+    "axios": "^1.13.2",
     "react": "^18.2.0",
     "react-barcode": "^1.6.1",
     "react-dom": "^18.2.0",
-    "react-qr-code": "^2.0.11"
+    "react-qr-code": "^2.0.18"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
